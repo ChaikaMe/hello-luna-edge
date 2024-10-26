@@ -8,6 +8,7 @@
   line-height: 150%;
   letter-spacing: -0.01em;
   color: #4f637d;
+  transition: height var(--animation);
 }
 
 .bar {
@@ -30,10 +31,22 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  height: 18px;
 }
 
 .button {
   border-color: transparent;
   background-color: transparent;
   padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.arrowIcon {
+  width: 8px;
+  height: 8px;
+  fill: transparent;
 }

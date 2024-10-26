@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 0 32px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #134267;
+  margin: 0;
+}
+
+.span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  color: #4f637d;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.label {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  color: #4f637d;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.button {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #fff;
+
+  background-color: #32abf2;
+  height: 43px;
+  border-radius: 8px;
+  border-color: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.haveShopifySpan {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #4f637d;
+}
+
+.spanButton {
+  color: #32abf2;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  background-color: transparent;
+  border: 0 solid transparent;
+  padding: 0;
+  cursor: pointer;
+}

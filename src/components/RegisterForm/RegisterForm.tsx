@@ -1,5 +1,5 @@
 import css from "./RegisterForm.module.css";
-import { useState } from "react";
+import { useState, MutableRefObject } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -10,12 +10,15 @@ import { NavLink } from "react-router-dom";
 
 interface RegisterFormProps {
   setProgress: (number: number) => void;
+  realProgress: MutableRefObject<number>;
 }
 
 export default function RegisterForm({
   setProgress,
+  realProgress,
 }: RegisterFormProps) {
   const [hidePwd, setHidePwd] = useState<boolean>(false);
+
   interface RegisterFormData {
     name: string;
     email: string;
@@ -40,6 +43,7 @@ export default function RegisterForm({
         });
       }
       setProgress(2);
+      realProgress.current = 2;
     } catch (e: unknown) {
       if (isErrorWithCode(e)) {
         if (e.code === "auth/email-already-in-use") {
@@ -76,7 +80,7 @@ export default function RegisterForm({
   return (
     <section className={css.section}>
       <div className={css.text}>
-        <h2 className={css.textTitle}>Welcome to Chad</h2>
+        <h1 className={css.textTitle}>Welcome to Chad</h1>
         <p className={css.textDesc}>
           Go live in 10 minutes! Our self-service widget empowers your
           customers to manage orders and track shipments 24/7 without
@@ -92,6 +96,7 @@ export default function RegisterForm({
                 className={css.input}
                 placeholder="megachad@trychad.com"
                 {...register("email")}
+                disabled={realProgress.current >= 2}
               />
             </label>
             {errors.email && (
@@ -109,6 +114,7 @@ export default function RegisterForm({
                 placeholder="Mega Chad"
                 {...register("name")}
                 autoComplete="off"
+                disabled={realProgress.current >= 2}
               />
             </label>
             {errors.name && (
@@ -126,6 +132,7 @@ export default function RegisterForm({
                 placeholder="Enter password"
                 type={`${hidePwd ? "text" : "password"}`}
                 {...register("password")}
+                disabled={realProgress.current >= 2}
               />
             </label>
             <svg
@@ -145,8 +152,19 @@ export default function RegisterForm({
             )}
           </li>
         </ul>
-        <button className={css.button} type="submit">
-          Create account
+        <button
+          className={css.button}
+          type="submit"
+          disabled={realProgress.current >= 2}
+          style={{
+            backgroundColor:
+              realProgress.current >= 2 ? "transparent" : "#32abf2",
+            color: realProgress.current >= 2 ? "#32abf2" : "#fff",
+          }}
+        >
+          {realProgress.current >= 2
+            ? "You created an account"
+            : "Create account"}
         </button>
       </form>
       <span className={css.loginText}>

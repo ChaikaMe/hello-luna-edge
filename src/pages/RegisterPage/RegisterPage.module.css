@@ -1,15 +1,35 @@
 .container {
-  padding: 16px 32px;
+  padding: 16px 0;
   max-width: 540px;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 32px;
   margin: 0 auto;
+  position: relative;
 }
 
 .logoSection {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 0 32px;
+}
+
+.sliderSection {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slidesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  transition: transform 350ms ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
 }
