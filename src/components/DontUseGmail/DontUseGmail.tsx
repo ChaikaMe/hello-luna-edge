@@ -1,18 +1,20 @@
-import { MenuItem, Select } from "@mui/material";
+import css from "./DontUseGmail.module.css";
 import icons from "../../images/icons.svg";
-import css from "./DontUseShopify.module.css";
-import { SVGProps, useState } from "react";
+import { MutableRefObject, SVGProps, useState } from "react";
+import { MenuItem, Select } from "@mui/material";
 import toast from "react-hot-toast";
 
-interface DontUseShopifyProps {
+interface DontUseGmailProps {
   setModalIndex: (ModalIndex: number) => void;
   setProgressOpen: (ProgressOpen: boolean) => void;
+  realProgress: MutableRefObject<number>;
 }
 
-export default function DontUseShopify({
+export default function DontUseGmail({
   setModalIndex,
   setProgressOpen,
-}: DontUseShopifyProps) {
+  realProgress,
+}: DontUseGmailProps) {
   const [platform, setPlatform] = useState<string>("");
   const CustomIcon = (props: SVGProps<SVGSVGElement>) => (
     <svg width="16" height="16" fill="none" {...props}>
@@ -20,19 +22,14 @@ export default function DontUseShopify({
     </svg>
   );
 
-  const actuallyUseHandler = () => {
-    setModalIndex(1);
-    setProgressOpen(false);
-  };
-
   return (
     <div className={css.container}>
       <div className={css.textContainer}>
-        <h1 className={css.title}>Don&#8217;t use Shopify?</h1>
+        <h1 className={css.title}>Don&#8217;t use Gmail?</h1>
         <span className={css.span}>
-          Chad Beta is currently only available on Shopify.
-          We&#8217;ll send you an email when Chad becomes available on
-          your platform.
+          Chad Beta is currently only integrated with Gmail.
+          We&#8217;ll send you an email when Chad becomes compatible
+          with your support ticket platform.
         </span>
       </div>
       <form className={css.form}>
@@ -85,11 +82,15 @@ export default function DontUseShopify({
             Submit
           </button>
           <span className={css.haveShopifySpan}>
-            Actually use Shopify?{" "}
+            Actually use Gmail?{" "}
             <button
               className={css.spanButton}
-              onClick={actuallyUseHandler}
               type="button"
+              onClick={() => {
+                setProgressOpen(false);
+                realProgress.current = 4;
+                setModalIndex(2);
+              }}
             >
               Connect
             </button>

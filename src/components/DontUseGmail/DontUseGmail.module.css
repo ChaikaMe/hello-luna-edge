@@ -12,6 +12,7 @@
 }
 
 .title {
+  font-family: var(--font-family);
   font-weight: 600;
   font-size: 24px;
   line-height: 120%;
@@ -21,6 +22,7 @@
 }
 
 .span {
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -35,6 +37,7 @@
 }
 
 .label {
+  font-family: var(--font-family);
   font-weight: 500;
   font-size: 12px;
   line-height: 150%;
@@ -52,6 +55,7 @@
   gap: 16px;
 }
 .button {
+  font-family: var(--font-family);
   font-weight: 500;
   font-size: 14px;
   line-height: 150%;
@@ -68,6 +72,7 @@
 }
 
 .haveShopifySpan {
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
@@ -78,6 +83,7 @@
 
 .spanButton {
   color: #32abf2;
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;

@@ -13,6 +13,7 @@
 }
 
 .textTitle {
+  font-family: var(--font-family);
   font-weight: 600;
   font-size: 24px;
   line-height: 120%;
@@ -22,6 +23,7 @@
 }
 
 .textDesc {
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -82,14 +84,28 @@
   gap: 16px;
 }
 
+.gmailButtonWrapper {
+  display: flex;
+  border-radius: 2px;
+  border: 1px solid #5383ec;
+  height: 50px;
+}
+
+.gmailIcon {
+  width: 18px;
+  height: 18px;
+  margin: 15px 16px 15px 14px;
+  flex-shrink: 0;
+}
+
 .button {
-  border-radius: 8px;
-  height: 43px;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
-  border-color: transparent;
+  border: 0 solid transparent;
   align-items: center;
-  background-color: #32abf2;
+  background-color: #5383ec;
   padding: 0;
   cursor: pointer;
 
@@ -101,7 +117,7 @@
   color: #fff;
 }
 
-.noShopifyButton {
+.noGmailButton {
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
@@ -112,6 +128,6 @@
   background-color: transparent;
 }
 
-.noShopofyContainer {
+.noGmailContainer {
   width: 100%;
 }

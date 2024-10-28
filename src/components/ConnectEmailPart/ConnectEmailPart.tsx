@@ -1,53 +1,45 @@
-import css from "./ConnectShopifyPart.module.css";
+import css from "./ConnectEmailPart.module.css";
 import icons from "../../images/icons.svg";
 import { MutableRefObject, useState } from "react";
 import { Fade } from "@mui/material";
-import DontUseShopify from "../DontUseShopify/DontUseShopify";
+import DontUseGmail from "../DontUseGmail/DontUseGmail";
 
-interface ConnectShopifyProps {
+interface ConnectEmailProps {
   setModalIndex: (ModalIndex: number) => void;
   setProgressOpen: (ProgressOpen: boolean) => void;
-  fakeIsConnected: MutableRefObject<boolean>;
   realProgress: MutableRefObject<number>;
 }
 
-export default function ConnectShopifyPart({
+export default function ConnectEmailPart({
   setModalIndex,
   setProgressOpen,
-  fakeIsConnected,
   realProgress,
-}: ConnectShopifyProps) {
+}: ConnectEmailProps) {
   const prosData = [
     {
-      title: "Track orders and shipping",
-      span: "Global coverage with 600+ couriers supported",
+      title: "Contextual responses",
+      span: "Custom responses to any support situation from \u201Cwhere\u2019s my stuff?\u201D to \u201CI want a refund\u201D",
     },
     {
-      title: "Manage orders",
-      span: "Allow customers to track, return, exchange, or report problems with their orders",
+      title: "Reply from anywhere",
+      span: "Respond to your customers via email or Chad chat\u2014it\u2019s all saved in the same thread",
     },
     {
-      title: "Process returns and exchanges",
-      span: "Automatically checks your store policy and existing inventory before resolving or escalating each request",
+      title: "Categorical inbox tags",
+      span: "Tags your emails by category so you know what to expect before even opening an email",
     },
   ];
-  const [prosShopifyMenu, setProsShopifyMenu] =
-    useState<boolean>(true);
+  const [prosEmailMenu, setProsEmailMenu] = useState<boolean>(true);
   const [dontUseMenu, setDontUseMenu] = useState<boolean>(false);
 
   const dontUseClickHandler = () => {
-    if (fakeIsConnected.current) {
-      setModalIndex(1);
-      setProgressOpen(false);
-      return;
-    }
-    setProsShopifyMenu(false);
+    setProsEmailMenu(false);
   };
 
   return (
     <>
       <Fade
-        in={prosShopifyMenu === true}
+        in={prosEmailMenu === true}
         onExited={() => {
           setDontUseMenu(true);
         }}
@@ -57,12 +49,12 @@ export default function ConnectShopifyPart({
         <section className={css.section}>
           <div className={css.text}>
             <h1 className={css.textTitle}>
-              Connect to Shopify Store
+              Connect to customer {window.innerWidth <= 390 && <br />}{" "}
+              support email
             </h1>
             <p className={css.textDesc}>
-              Installs the Chad widget in your Shopify store and sets
-              it up to display your customers&#8217; order information
-              and self-serve options.
+              Allows Chad to send automated responses on your behalf
+              from your usual support mailbox
             </p>
           </div>
 
@@ -80,27 +72,33 @@ export default function ConnectShopifyPart({
             ))}
           </ul>
           <div className={css.buttonsContainer}>
+            <div className={css.gmailButtonWrapper}>
+              <svg className={css.gmailIcon}>
+                <use href={`${icons}#icon-gmail`} />
+              </svg>
+              <button
+                className={css.button}
+                type="button"
+                onClick={() => {
+                  setProgressOpen(false);
+                  realProgress.current = 4;
+                  setModalIndex(2);
+                }}
+              >
+                Connect Gmail account
+              </button>
+            </div>
             <button
-              className={css.button}
-              type="button"
-              onClick={() => {
-                setModalIndex(1);
-                setProgressOpen(false);
-              }}
-            >
-              Connect store
-            </button>
-            <button
-              className={css.noShopifyButton}
+              className={css.noGmailButton}
               type="button"
               onClick={dontUseClickHandler}
-              disabled={realProgress.current > 2}
+              disabled={realProgress.current > 3}
               style={{
                 color:
-                  realProgress.current > 2 ? "#c3cad5" : "#4f637d",
+                  realProgress.current > 3 ? "#c3cad5" : "#4f637d",
               }}
             >
-              I don&#8217;t use Shopify
+              I don&#8217;t use Gmail
             </button>
           </div>
         </section>
@@ -108,15 +106,16 @@ export default function ConnectShopifyPart({
       <Fade
         in={dontUseMenu === true}
         onExited={() => {
-          setProsShopifyMenu(true);
+          setProsEmailMenu(true);
         }}
         mountOnEnter
         unmountOnExit
       >
-        <div className={css.noShopofyContainer}>
-          <DontUseShopify
+        <div className={css.noGmailContainer}>
+          <DontUseGmail
             setModalIndex={setModalIndex}
             setProgressOpen={setProgressOpen}
+            realProgress={realProgress}
           />
         </div>
       </Fade>

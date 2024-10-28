@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import icons from "../../images/icons.svg";
 import { auth } from "../../firebase";
 import { NavLink } from "react-router-dom";
+import useRealLoad from "../../helpers/realLoad";
 
 interface RegisterFormProps {
   setProgress: (number: number) => void;
@@ -18,22 +19,23 @@ export default function RegisterForm({
   realProgress,
 }: RegisterFormProps) {
   const [hidePwd, setHidePwd] = useState<boolean>(false);
+  const pwdVisibilityToggle = () => {
+    setHidePwd(!hidePwd);
+  };
+
+  const realLoad = useRealLoad();
 
   interface RegisterFormData {
     name: string;
     email: string;
     password: string;
   }
-
-  const pwdVisibilityToggle = () => {
-    setHidePwd(!hidePwd);
-  };
-
   const onSubmit = async ({
     name,
     email,
     password,
   }: RegisterFormData) => {
+    realLoad(true);
     try {
       const userCredential =
         await auth.createUserWithEmailAndPassword(email, password);
@@ -53,6 +55,8 @@ export default function RegisterForm({
       return toast.error(
         "Something went wrong! Please try again later"
       );
+    } finally {
+      realLoad(false);
     }
     function isErrorWithCode(e: unknown): e is { code: string } {
       return typeof e === "object" && e !== null && "code" in e;
@@ -152,27 +156,29 @@ export default function RegisterForm({
             )}
           </li>
         </ul>
-        <button
-          className={css.button}
-          type="submit"
-          disabled={realProgress.current >= 2}
-          style={{
-            backgroundColor:
-              realProgress.current >= 2 ? "transparent" : "#32abf2",
-            color: realProgress.current >= 2 ? "#32abf2" : "#fff",
-          }}
-        >
-          {realProgress.current >= 2
-            ? "You created an account"
-            : "Create account"}
-        </button>
+        <div className={css.buttonsWrapper}>
+          <button
+            className={css.button}
+            type="submit"
+            disabled={realProgress.current >= 2}
+            style={{
+              backgroundColor:
+                realProgress.current >= 2 ? "transparent" : "#32abf2",
+              color: realProgress.current >= 2 ? "#32abf2" : "#fff",
+            }}
+          >
+            {realProgress.current >= 2
+              ? "You created an account"
+              : "Create account"}
+          </button>
+          <span className={css.loginText}>
+            Already have an account?{" "}
+            <NavLink className={css.loginLink} to="/login">
+              Login
+            </NavLink>
+          </span>
+        </div>
       </form>
-      <span className={css.loginText}>
-        Already have an account?{" "}
-        <NavLink className={css.loginLink} to="/login">
-          Login
-        </NavLink>
-      </span>
     </section>
   );
 }
