@@ -18,7 +18,13 @@ const NotFoundPage = lazy(
 
 function App() {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense
+      fallback={
+        <div style={{ height: "100vh" }}>
+          <Loader />
+        </div>
+      }
+    >
       <Routes>
         <Route path="/" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
